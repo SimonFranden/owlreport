@@ -25,7 +25,9 @@ function Login() {
       if (response.ok) {
         alert("Inloggning Godkänd");
       } else {
-        setError("Fel Anvädarnamn eller Lösenord");
+        response.json()
+        .then(json => setError(json.message))
+        //setError(response.json());
       }
     } catch (error) {
       console.error(error);
