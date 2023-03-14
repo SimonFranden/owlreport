@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Navigate, useNavigate } from 'react-router-dom';
 
+var loggedIn = false;
 function Login() {
+  
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -24,6 +28,8 @@ function Login() {
       });
       if (response.ok) {
         alert("Inloggning Godkänd");
+        Navigate('/timesheet', {replace: true})
+        
       } else {
         response.json()
         .then(json => setError(json.message))
