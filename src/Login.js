@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navigate, useNavigate } from 'react-router-dom';
 
-var loggedIn = false;
 function Login() {
   
 
@@ -28,7 +26,10 @@ function Login() {
       });
       if (response.ok) {
         alert("Inloggning Godkänd");
-        Navigate('/timesheet', {replace: true})
+        sessionStorage.setItem('LoggedIn', true);
+        window.location.reload();
+
+        //need to remove 'LoggedIn' from localStorage when logging out
         
       } else {
         response.json()

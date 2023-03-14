@@ -1,6 +1,6 @@
 import './App.css';
 import { TimeSheetUIComponent } from './components/TimeSheetUI.js';
-import { React } from "react";
+import { React , Component} from "react";
 import { NavbarComponent } from "./components/Navbar.js";
 import {BrowserRouter as Router, HashRouter, Route, Routes} from "react-router-dom";
 import Login from './Login';
@@ -9,23 +9,39 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 
-export default function App() { 
+
+class App extends Component {
 
 
-  return(
-    <HashRouter>
-    <NavbarComponent/>
+  render () {
+    let logindata = sessionStorage.getItem('LoggedIn');
     
-    <Routes>
-    <Route path="/timesheet" element={<TimeSheetUIComponent/>} />
-    <Route path="/login" element={<Login/>} />
-    </Routes>
-    </HashRouter>
-  )
+    if (logindata){
+      return(
+        <HashRouter>
+        <NavbarComponent/>
         
+        <Routes>
+        <Route path="/" element= { logindata ? <TimeSheetUIComponent/> : <Login/>}/>
+        <Route path="/timesheet" element={<TimeSheetUIComponent/>} />
+        <Route path="/login" element={<Login/>} />
+        </Routes>
+        </HashRouter>
+      )
+    }
+    else
+    {
+      return(
+        <HashRouter>
+        <Routes>
+        <Route path="/" element= {<Login/>}/>
+        </Routes>
+        </HashRouter>
+      )
+    }
 
+  }
 
+}
 
-          
-    
-};
+export default App;
