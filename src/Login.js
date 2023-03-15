@@ -22,10 +22,25 @@ function Login() {
         body: JSON.stringify({
           username: username,
           password: password
-        })
-      });
+        })       
+      })
+      // .then(res => res.json())
+      // .then(data => {
+      //   console.log(data);
+      // })
+      
+      
+
       if (response.ok) {
-        alert("Inloggning Godkänd");
+        //alert("Inloggning Godkänd");
+        response.json()
+        .then(data => {
+          sessionStorage.setItem('Username', data.username)
+          sessionStorage.setItem('UserFName', data.fName)
+          sessionStorage.setItem('UserLName', data.lName)
+          sessionStorage.setItem('UserSecretKey', data.secretKey)
+          console.log(data);
+        })
         sessionStorage.setItem('LoggedIn', true);
         window.location.reload();
 

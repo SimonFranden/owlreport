@@ -30,20 +30,20 @@ export default function TimeSheetModal() {
       
       setInputs(values => ({...values, [name]: value}))
     }
-  
     const handleSubmit = (event) => {
       event.preventDefault();
-      setInputs(values => ({...values, ['date']: value.toISOString().slice(0, 10)}))
-      console.log(inputs);
+                 
+      let body = inputs;
+      body["userName"] = sessionStorage.getItem('UserFName') + " " + sessionStorage.getItem('UserLName');    
+
       fetch('https://localhost:7063/api/timereport/',{
         method: 'POST',
-
-        body: JSON.stringify(inputs),
+        body: JSON.stringify(body),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
           },
       })
-
+      window.location.reload();
     }
   
     const [show, setShow] = useState(false);
@@ -73,18 +73,17 @@ export default function TimeSheetModal() {
 
         <Modal.Body>
 
-
         <form onSubmit={handleSubmit}>
             <label>Vilken dag?
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                 name="date"
                 value={value}
-                onChange={(newvalue)=>{
-                    
-                    setvalue(newvalue)
-                    console.log(value);
-                }}
+                onChange={(newvalue)=>{                   
+                    setvalue(newvalue)                   
+                    inputs["date"] = newvalue.toISOString().slice(0, 10);
+                }
+              }
                 />
             </LocalizationProvider>
 
