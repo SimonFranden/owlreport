@@ -42,7 +42,7 @@ export const TimeSheetUIComponent = () => {
               <TableCell align="right">Comment</TableCell>
               {/* <TableCell align="right">Project</TableCell> */}
               <TableCell align="right">Hours</TableCell>
-              <TableCell align="right">Username</TableCell>
+              <TableCell align="right">Name</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
