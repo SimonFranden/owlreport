@@ -57,68 +57,76 @@ export default function TimeSheetModal() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <div className="modal-button">
+        <Button variant="primary btn-lg" onClick={handleShow}>
         Rapportera tid
-      </Button>
+        </Button>
+      </div>
 
+      <div >
       <Modal
         show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Tidsrapportering</Modal.Title>
-        </Modal.Header>
+      > 
+        <div className='modal-header'>
+        <Modal.Header>
+            <Modal.Title ><div className='modal-header-text'>Tidsrapportering</div></Modal.Title>
+          </Modal.Header>
+        </div>
 
+        <div className='modal-body'>
         <Modal.Body>
 
-        <form onSubmit={handleSubmit}>
-            <label>Vilken dag?
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                name="date"
-                value={value}
-                onChange={(newvalue)=>{                   
-                    setvalue(newvalue)                   
-                    inputs["date"] = newvalue.toISOString().slice(0, 10);
-                }
-              }
+          <form onSubmit={handleSubmit}>
+              <label className='modal-option-date'>Vilken dag?:<br></br>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                    name="date"
+                    value={value}
+                    onChange={(newvalue)=>{                   
+                        setvalue(newvalue)                   
+                        inputs["date"] = newvalue.toISOString().slice(0, 10);
+                    }
+                  }
+                    />
+                </LocalizationProvider>
+              </label>
+
+              <label className='modal-option-project'>Vilket projekt?:<br></br>
+                <select name="projectId" value={inputs.projectId ?inputs.projectId : ''} onChange={handleChange}>
+                <option value="" disabled={true}>-</option>
+                {projects.map((option, i) => (
+                      <option key={i} value={option.projectId}>{option.projectName}</option>
+                    ))}
+                </select>
+              </label>
+
+              <label className='modal-option-hours'>Timmar arbetade?:<br></br>
+                <input 
+                  name="hoursWorked"
+                  type="number"
+                  value={inputs.hoursWorked} 
+                  onChange={handleChange}
                 />
-            </LocalizationProvider>
+              </label>
 
-        </label>
-        <label>Vilket projekt?:
-        <select name="projectId" value={inputs.projectId ?inputs.projectId : ''} onChange={handleChange}>
-        <option value="" disabled={true}>-</option>
-        {projects.map((option, i) => (
-              <option key={i} value={option.projectId}>{option.projectName}</option>
-            ))}
-        </select>
-          </label>
+              <label className='modal-option-comment'>Kommentar:<br></br>
+                <input 
+                  name="comment"
+                  type="text"
+                  value={inputs.comment} 
+                  onChange={handleChange}
+                />
+              </label>
+            
+          </form>
 
-          <label>Timmar arbetade?:
-          <input 
-            name="hoursWorked"
-            type="number"
-            value={inputs.hoursWorked} 
-            onChange={handleChange}
-          />
-          </label>
-
-          <label>Kommentar:
-          <input 
-            name="comment"
-            type="text"
-            value={inputs.comment} 
-            onChange={handleChange}
-          />
-          </label>
-          
-      </form>
-
-        </Modal.Body>
-
+          </Modal.Body>
+        </div>
+        
+        <div className='modal-footer'>
         <Modal.Footer>
             <button className="bg-dark text-white font-bold py-2 px-4 rounded"
                 onClick={handleClose}
@@ -131,7 +139,10 @@ export default function TimeSheetModal() {
                 Rapportera
             </button>
         </Modal.Footer>
+        </div>
+        
       </Modal>
+      </div>
     </>
   );
 }

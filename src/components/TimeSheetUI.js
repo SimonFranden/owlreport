@@ -28,21 +28,22 @@ export const TimeSheetUIComponent = () => {
 
     return (
     <div>
-            <div>
+            <div className="date-picker1">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker />
+                <DatePicker/>
               </LocalizationProvider>
             </div>
-        <div>
+
+        <div className="report-table">
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="right">Date</TableCell>
-              <TableCell align="right">Comment</TableCell>
+              <TableCell align="center">Date</TableCell>
+              <TableCell align="center">Comment</TableCell>
               {/* <TableCell align="right">Project</TableCell> */}
-              <TableCell align="right">Hours</TableCell>
-              <TableCell align="right">Name</TableCell>
+              <TableCell align="center">Hours</TableCell>
+              <TableCell align="center">Name</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -52,11 +53,11 @@ export const TimeSheetUIComponent = () => {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 
-                <TableCell align="right">{row.date}</TableCell>
-                <TableCell align="right">{row.comment}</TableCell>
-                {/* <TableCell align="right">{row.projectname}</TableCell> */}
-                <TableCell align="right">{row.hoursWorked}</TableCell>
-                <TableCell align="right">{row.userName}</TableCell>
+                <TableCell align="center">{row.date}</TableCell>
+                <TableCell align="center">{row.comment}</TableCell>
+                {/* <TableCell align="center">{row.projectname}</TableCell> */}
+                <TableCell align="center">{row.hoursWorked}</TableCell>
+                <TableCell align="center">{row.userName}</TableCell>
               </TableRow>
             ))}
           </TableBody>
