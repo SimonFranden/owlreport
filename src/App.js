@@ -1,4 +1,5 @@
 import './App.css';
+import'./css/style.css'
 import { TimeSheetUIComponent } from './components/TimeSheetUI.js';
 import { React , Component} from "react";
 import { NavbarComponent } from "./components/Navbar.js";
