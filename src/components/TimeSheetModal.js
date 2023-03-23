@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
+import {ApiUrl} from '../configParams.js';
 
 export default function TimeSheetModal() {
     
@@ -17,7 +17,7 @@ export default function TimeSheetModal() {
     const [projects, setProjects] = useState([])
     useEffect(()=> {
 
-            fetch('https://localhost:7063/api/project/')
+            fetch(ApiUrl + 'project/')
             .then(res => res.json())
             .then(data => {
               setProjects(data)
@@ -36,7 +36,7 @@ export default function TimeSheetModal() {
       let body = inputs;
       body["userName"] = sessionStorage.getItem('UserFName') + " " + sessionStorage.getItem('UserLName');    
 
-      fetch('https://localhost:7063/api/timereport/',{
+      fetch(ApiUrl + 'timereport/',{
         method: 'POST',
         body: JSON.stringify(body),
         headers: {

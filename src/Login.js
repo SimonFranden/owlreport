@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+import {ApiUrl} from './configParams.js';
 
 function Login() {
   
@@ -14,7 +15,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://localhost:7063/api/Auth/Login', {
+      const response = await fetch(ApiUrl + 'Auth/Login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -28,7 +29,6 @@ function Login() {
       // .then(data => {
       //   console.log(data);
       // })
-      
       
 
       if (response.ok) {

@@ -10,7 +10,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import TimeSheetModal from './TimeSheetModal';
-
+import {ApiUrl} from '../configParams.js';
 
 
 // TimeReport UI
@@ -20,7 +20,7 @@ export const TimeSheetUIComponent = () => {
   const [timeReports, setTimereports] = useState([])
   useEffect(()=> {
 
-          fetch('https://localhost:7063/api/timereport/')
+          fetch(ApiUrl + 'timereport/')
           .then(res => res.json())
           .then(data => {
             setTimereports(data)

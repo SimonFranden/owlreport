@@ -15,7 +15,6 @@ class App extends Component {
 
   render () {
     let logindata = sessionStorage.getItem('LoggedIn');
-    
     if (logindata){
       return(
         <HashRouter>
