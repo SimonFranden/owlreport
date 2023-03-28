@@ -5,6 +5,7 @@ import { React , Component} from "react";
 import { NavbarComponent } from "./components/Navbar.js";
 import {BrowserRouter as Router, HashRouter, Route, Routes} from "react-router-dom";
 import Login from './Login';
+import ProjectsPage from './components/ProjectsPage';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -25,8 +26,10 @@ class App extends Component {
         <Route path="/" element= { logindata ? <TimeSheetUIComponent/> : <Login/>}/>
         <Route path="/timesheet" element={<TimeSheetUIComponent/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/projects" element={<ProjectsPage/>} />
         </Routes>
         </HashRouter>
+        
       )
     }
     else

@@ -13,7 +13,7 @@ export const NavbarComponent = (props) => {
             <Nav className="ms-auto">
                 <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
                 <Nav.Link as={NavLink} to="/timesheet">Time Sheet</Nav.Link>
-                <Nav.Link as={NavLink} to="/Overwiew">Project Overview</Nav.Link>
+                <Nav.Link as={NavLink} to="/projects">Project Overview</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
