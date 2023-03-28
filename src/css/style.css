@@ -1,0 +1,61 @@
+
+/*TimeSheeetModal.js*/
+
+.modal-button{
+    text-align: center;
+    margin:40px;
+}
+
+
+/*Inside Modal*/
+
+/*Header*/
+.modal-header{
+    text-align: center;
+    margin: auto;
+}
+.modal-header-text{
+    font-size: 35px;
+}
+/*Body*/
+.modal-body{
+    text-align: center;
+    margin: auto;
+}
+/*Modal Options*/
+.modal-option-date{
+    text-align: center;
+    font-size:25px;
+    margin: 15px;
+}
+.modal-option-project{
+    text-align: center;
+    font-size:25px;
+    margin: 15px;
+}
+.modal-option-hours{
+    text-align: center;
+    font-size:25px;
+    margin: 15px;
+}
+.modal-option-comment{
+    text-align: center;
+    font-size:25px;
+    margin: 15px;
+}
+/*Footer*/
+.modal-footer{
+    text-align: center;
+    margin: auto;
+}
+
+
+/*TimeSheetUI.js*/
+.date-picker1{
+    text-align: center;
+    margin:50px;
+}
+.report-table{
+    text-align: center;
+    margin:35px;
+}
