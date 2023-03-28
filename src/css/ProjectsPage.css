@@ -1,12 +1,19 @@
-h3, p
-{
-    color: white;
-}
+
+    
+/*ProjectFeedComponent.js*/
 .project-card
 {   
+    
     padding: 1rem;
     margin-top: 1.5rem;
 }
 
-h3
-{}
+.container
+{
+    padding-top: 1rem;
+}
+
+select
+{
+
+}
