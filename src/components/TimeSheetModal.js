@@ -5,6 +5,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {ApiUrl} from '../configParams.js';
+import { json } from 'react-router-dom';
 
 export default function TimeSheetModal() {
     
@@ -16,10 +17,12 @@ export default function TimeSheetModal() {
     
     const [projects, setProjects] = useState([])
     useEffect(()=> {
-
-            fetch(ApiUrl + 'project/')
+            const s = sessionStorage.getItem('UserSecretKey')
+            console.log(s);
+            fetch(ApiUrl + 'user/userprojects/' + s)
             .then(res => res.json())
             .then(data => {
+              console.log(data);
               setProjects(data)
             })},[])
     
@@ -98,7 +101,7 @@ export default function TimeSheetModal() {
                 <select name="projectId" value={inputs.projectId ?inputs.projectId : ''} onChange={handleChange}>
                 <option value="" disabled={true}>-</option>
                 {projects.map((option, i) => (
-                      <option key={i} value={option.projectId}>{option.projectName}</option>
+                      <option key={i} disabled={!option.isActive} value={option.projectId}>{option.projectName}</option>
                     ))}
                 </select>
               </label>
