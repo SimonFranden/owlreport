@@ -17,14 +17,24 @@ import {ApiUrl} from '../configParams.js';
 
 export const TimeSheetUIComponent = () => {
 
-  const [timeReports, setTimereports] = useState([])
-  useEffect(()=> {
+  const [timeReports, setTimereports] = useState([]);
+  const [projectHours, setProjectHours] = useState([]);
 
-          fetch(ApiUrl + 'timereport/')
-          .then(res => res.json())
-          .then(data => {
-            setTimereports(data)
-          })},[])
+  useEffect(() => {
+    fetch(ApiUrl + 'timereport/')
+      .then(res => res.json())
+      .then(data => {
+        setTimereports(data)
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch('https://localhost:7063/api/timereport/total-hours')
+      .then(res => res.json())
+      .then(data => {
+        setProjectHours(data)
+      });
+  }, []);
 
     return (
     <div>
@@ -64,9 +74,14 @@ export const TimeSheetUIComponent = () => {
         </Table>
         </TableContainer>
         </div>
+            {/* Displays the Project hours */}
+            {projectHours.map((row, index) => (
+  <p key={index}>
+    Project Name: {row.projectName}, Total Hours: {row.totalHours}
+  </p>
+))}
       <TimeSheetModal/>
     </div>
     )
 }
-
 
