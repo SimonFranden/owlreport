@@ -35,6 +35,7 @@ function Login() {
         //alert("Inloggning Godkänd");
         response.json()
         .then(data => {
+          sessionStorage.setItem('UserId', data.userId)
           sessionStorage.setItem('Username', data.username)
           sessionStorage.setItem('UserFName', data.fName)
           sessionStorage.setItem('UserLName', data.lName)
