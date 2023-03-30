@@ -74,12 +74,6 @@ export const TimeSheetUIComponent = () => {
         </Table>
         </TableContainer>
         </div>
-            {/* Displays the Project hours */}
-            {projectHours.map((row, index) => (
-  <p key={index}>
-    Project Name: {row.projectName}, Total Hours: {row.totalHours}
-  </p>
-))}
       <TimeSheetModal/>
     </div>
     )

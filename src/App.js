@@ -7,6 +7,7 @@ import {BrowserRouter as Router, HashRouter, Route, Routes} from "react-router-d
 import Login from './Login';
 import ProjectsPage from './components/ProjectsPage';
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -14,20 +15,25 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends Component {
 
+//Log out function
+  handleLogout = () => {
+    sessionStorage.removeItem('LoggedIn');
+    window.location = '/login';
+  }
 
-  render () {
+  render() {
+    //Renders app if user is accepted in the Login Function
     let logindata = sessionStorage.getItem('LoggedIn');
-    if (logindata){
-      return(
+    if (logindata) {
+      return (
         <HashRouter>
-        <NavbarComponent/>
-        
-        <Routes>
-        <Route path="/" element= { logindata ? <TimeSheetUIComponent/> : <Login/>}/>
-        <Route path="/timesheet" element={<TimeSheetUIComponent/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/projects" element={<ProjectsPage/>} />
-        </Routes>
+          <NavbarComponent handleLogout={this.handleLogout} />
+          <Routes>
+            <Route path="/" element={logindata ? <TimeSheetUIComponent /> : <Login />} />
+            <Route path="/timesheet" element={<TimeSheetUIComponent />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+          </Routes>
         </HashRouter>
         
       )

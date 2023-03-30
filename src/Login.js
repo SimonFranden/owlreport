@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import {ApiUrl} from './configParams.js';
 
+
+//Login Function
 function Login() {
   
 
@@ -25,14 +27,10 @@ function Login() {
           password: password
         })       
       })
-      // .then(res => res.json())
-      // .then(data => {
-      //   console.log(data);
-      // })
+
       
 
       if (response.ok) {
-        //alert("Inloggning Godkänd");
         response.json()
         .then(data => {
           sessionStorage.setItem('Username', data.username)
@@ -44,7 +42,7 @@ function Login() {
         sessionStorage.setItem('LoggedIn', true);
         window.location.reload();
 
-        //need to remove 'LoggedIn' from localStorage when logging out
+        
         
       } else {
         response.json()
@@ -55,38 +53,43 @@ function Login() {
       console.error(error);
     }
   };
+
   
+  //Login Form
   return (
-    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
-      <div className="container" style={{ maxWidth: "600px" }}>
-        <div className="card">
-          <div className="card-body">
-            <h2 className="card-title text-center mb-4">Välkommen</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group mb-4">
-                <label htmlFor="username" className="form-label">Användarnamn</label>
-                <input type="text" onChange={handleUsernameChange} className="form-control" id="username" placeholder="Användarnamn" name="username" />
+      <section className="vh-100 gradient-custom">
+      <div className="container py-5 h-100">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div className="card bg-dark text-white" style={{ borderRadius: "1rem" }}>
+              <div className="card-body p-5 text-center">
+  
+                <div className="mb-md-5 mt-md-4 pb-5">
+  
+                  <h2 className="fw-bold mb-2 text-uppercase">Välkommen</h2>
+                  <p className="text-white-50 mb-5">Logga in med Användarnamn och Lösenord</p>
+  
+                  <form onSubmit={handleSubmit}>
+                  <div className="form-outline form-white mb-4">
+                  <input type="text" onChange={handleUsernameChange} id="typeUsername" className="form-control form-control-lg" />
+                  <label className="form-label" htmlFor="typeUsername">Anändarnamn</label>
+                  </div>
+  
+                    <div className="form-outline form-white mb-4">
+                      <input type="password" onChange={handlePasswordChange} id="typePasswordX" className="form-control form-control-lg" />
+                      <label className="form-label" htmlFor="typePasswordX">Lösenord</label>
+                    </div>
+                    <button className="btn btn-outline-light btn-lg px-5" type="submit">Logga in</button>
+                  </form>
+                </div>
               </div>
-              <div className="form-group mb-4">
-                <label htmlFor="password" className="form-label">Lösenord</label>
-                <input type="password" onChange={handlePasswordChange} className="form-control" id="password" placeholder="Löserord" name="password" />
-              </div>
-              <div className="form-group form-check mb-4">
-                <input className="form-check-input" type="checkbox" name="remember" id="remember" />
-                <label className="form-check-label" htmlFor="remember">
-                  Kom ihåg
-                </label>
-              </div>
-              {error && <div className="alert alert-danger">{error}</div>}
-              <div className="d-grid gap-2">
-                <button className="btn btn-primary" type="submit">Logga In</button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
+  
 }
 
 export default Login;
