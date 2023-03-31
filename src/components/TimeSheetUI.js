@@ -38,11 +38,6 @@ export const TimeSheetUIComponent = () => {
 
     return (
     <div>
-            <div className="date-picker1">
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker/>
-              </LocalizationProvider>
-            </div>
 
         <div className="report-table">
         <TableContainer component={Paper}>
@@ -51,7 +46,7 @@ export const TimeSheetUIComponent = () => {
             <TableRow>
               <TableCell align="center">Date</TableCell>
               <TableCell align="center">Comment</TableCell>
-              {/* <TableCell align="right">Project</TableCell> */}
+              <TableCell align="center">Project</TableCell>
               <TableCell align="center">Hours</TableCell>
               <TableCell align="center">Name</TableCell>
             </TableRow>
@@ -65,7 +60,7 @@ export const TimeSheetUIComponent = () => {
                 
                 <TableCell align="center">{row.date}</TableCell>
                 <TableCell align="center">{row.comment}</TableCell>
-                {/* <TableCell align="center">{row.projectname}</TableCell> */}
+                <TableCell align="center">{row.projectName}</TableCell>
                 <TableCell align="center">{row.hoursWorked}</TableCell>
                 <TableCell align="center">{row.userName}</TableCell>
               </TableRow>
