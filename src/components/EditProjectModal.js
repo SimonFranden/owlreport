@@ -14,6 +14,9 @@ export default function EditProjectModal({ project }) {
   const [show, setShow] = useState(false);
   const [appUsers, setAppUsers] = useState([]);
   const [membersToAdd, setMembersToAdd] = useState([]);
+  const [membersToRemove, setMembersToRemove] = useState([]);
+  const [filteredProjectMembers, setFilteredProjectMembers] = useState(project.projectMembers);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -21,6 +24,10 @@ export default function EditProjectModal({ project }) {
     projectName: project.projectName,
     projectLength: project.projectLength,
   });
+
+  function UpdateModal() {
+    this.forceUpdate()
+  }
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -50,96 +57,145 @@ export default function EditProjectModal({ project }) {
       .catch((error) => console.error(error));
   }, []);
 
-    return(
-        <>
-        <Button variant='warning' onClick={handleShow} className='ms-2 border-0 d-inline'>Edit</Button>
-  
-        <Modal show={show} onHide={handleClose} animation={false} className="">
-            
-        
-            <Tabs
-                defaultActiveKey="settings"
-                id="justify-tab-example"
-                className="mb-3"
-                justify
-                >
-                <Tab eventKey="settings" title="Settings">
-                    <Modal.Title className='ms-3'> Edit {project.projectName}</Modal.Title>
+  return (
+    <>
+      <Button variant='warning' onClick={handleShow} className='ms-2 border-0 d-inline'>Edit</Button>
 
-                    <Form onSubmit={handleSubmit} className="p-3">
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Project Name</Form.Label>
-                            <Form.Control type="text" placeholder="Project name" name="projectName" value={formState.projectName} onChange={handleInputChange}/>                       
-                        </Form.Group>
+      <Modal show={show} onHide={handleClose} animation={false} className="">
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Project length in hours</Form.Label>
-                            <Form.Control type="number" placeholder="0" name="projectLength" value={formState.projectLength} onChange={handleInputChange}/>
-                        </Form.Group>
-                        
-                        <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                        </Button>
-                    </Form>
-                </Tab>
-                <Tab eventKey="addMembers" title="Members">
-                    <div className="p-3">
-                        <DropdownButton id="dropdown-basic-button" title="+Add member">
-                           {appUsers.map(user => <DropdownItem onClick={() => {
-                            setMembersToAdd([...membersToAdd, user]);
-                            setAppUsers(appUsers.filter(appUser => appUser !== user ));
-                            
-                            }}>
 
-                            {user.fName} {user.lName}
-                        </DropdownItem>)}
-                            
-                        </DropdownButton>
+        <Tabs
+          defaultActiveKey="settings"
+          id="justify-tab-example"
+          className="mb-3"
+          justify
+        >
+          <Tab eventKey="settings" title="Settings">
+            <Modal.Title className='ms-3'> Edit {project.projectName}'s settings</Modal.Title>
 
-                        <ListGroup className='mb-3'>
-                        <ListGroup.Item><b>Members</b></ListGroup.Item>
-                        {project.projectMembers.map(pm => <ListGroup.Item>{pm.fName} {pm.lName}</ListGroup.Item>)}
-                        {membersToAdd.map(user => <ListGroup.Item>{user.fName} {user.lName}</ListGroup.Item>)} 
-                        
-                        </ListGroup>                       
-                        <Button variant="primary" onClick={() => {
-                            const sKey = sessionStorage.getItem('UserSecretKey')
-                            const userList1 = [{userId: 4, projectId: 1}];
-                            const userList = [];
-                            membersToAdd.map(user => userList.push({userId: user.id, projectId: project.projectId}));
+            <Form onSubmit={handleSubmit} className="p-3">
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Project Name</Form.Label>
+                <Form.Control type="text" placeholder="Project name" name="projectName" value={formState.projectName} onChange={handleInputChange} />
+              </Form.Group>
 
-                            fetch('https://localhost:7063/api/User/AddUsersToProject', {
-                                method: 'POST',
-                                headers: {
-                                  'Accept': 'text/plain',
-                                  'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                  userSecretKey: sKey,
-                                  userList: userList                                  
-                                })
-                              })
-                                .then(response => response.text())
-                                .then(data => {alert(data); window.location.reload();})
-                                .catch(error => console.error(error));
-                                
-                            }}>
-                        Save Changes
-                        </Button>
-                    </div>
-                </Tab>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Project length in hours</Form.Label>
+                <Form.Control type="number" placeholder="0" name="projectLength" value={formState.projectLength} onChange={handleInputChange} />
+              </Form.Group>
 
-            </Tabs>
-                             
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
+              <Button variant="primary" onClick={() => {
+                const requestBody = {
+                  projectId: project.projectId,
+                  projectName: formState.projectName,
+                  projectLength: formState.projectLength,
+                  userSecretKey: sessionStorage.getItem('UserSecretKey')
+                };
 
-          </Modal.Footer>
-        </Modal>
-      </>
-    );
+                fetch(ApiUrl + 'User/EditProject', {
+                  method: 'POST',
+                  headers: {
+                    'accept': 'text/plain',
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(requestBody)
+                })
+                  .then(response => {
+                    window.location.reload();
+                  })
+                  .catch(error => {
+                    // Handle errors here
+                  });
+              }}>
+                Save Changes
+              </Button>
+            </Form>
+          </Tab>
+
+          <Tab eventKey="addMembers" title="Members">
+          <Modal.Title className='ms-3'> Edit {project.projectName}'s members</Modal.Title>
+            <div className="p-3">
+            <div class="d-flex">
+                <DropdownButton id="dropdown-basic-button" title="+Add member" className='m-2 ms-0' variant="success">
+                  {appUsers.map(user => <DropdownItem onClick={() => {
+                    setMembersToAdd([...membersToAdd, user]);
+                    setAppUsers(appUsers.filter(appUser => appUser !== user));
+                  }}>
+                    {user.fName} {user.lName}
+                  </DropdownItem>)}
+                </DropdownButton>
+                <DropdownButton id="dropdown-basic-button" title="-Remove Member" variant="danger" className='m-2'>
+                  {filteredProjectMembers.map(user => <DropdownItem onClick={() => {
+                    setMembersToRemove([...membersToRemove, user]);
+                    setFilteredProjectMembers(filteredProjectMembers.filter(pm => pm !== user));
+                  }}>
+                    {user.fName} {user.lName}
+                  </DropdownItem>)}
+                </DropdownButton>
+              </div>
+
+              <ListGroup className='mb-3'>
+                <ListGroup.Item><b>Members</b></ListGroup.Item>
+
+                {filteredProjectMembers.map(pm => <ListGroup.Item>{pm.fName} {pm.lName}</ListGroup.Item>)}
+                {membersToAdd.map(user => <ListGroup.Item>{user.fName} {user.lName}</ListGroup.Item>)}
+
+              </ListGroup>
+
+              <Button variant="primary" onClick={() => {
+                const sKey = sessionStorage.getItem('UserSecretKey')
+
+                const userAddList = [];
+                membersToAdd.map(user => userAddList.push({ userId: user.id, projectId: project.projectId }));
+
+                fetch(ApiUrl + 'User/AddUsersToProject', {
+                  method: 'POST',
+                  headers: {
+                    'Accept': 'text/plain',
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    userSecretKey: sKey,
+                    userList: userAddList
+                  })
+                })
+                  .then(response => response.text())
+                  .then(data => { window.location.reload(); })
+                  .catch(error => console.error(error));
+
+                const userRemoveList = [];
+                membersToRemove.map(user => userRemoveList.push({ userId: user.id, projectId: project.projectId }));
+
+                fetch(ApiUrl + 'User/RemoveUsersToProject', {
+                  method: 'POST',
+                  headers: {
+                    'Accept': 'text/plain',
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    userSecretKey: sKey,
+                    userList: userRemoveList
+                  })
+                })
+                  .then(response => response.text())
+                  .then(data => { window.location.reload(); })
+                  .catch(error => console.error(error));
+              }}>
+                Save Changes
+              </Button>
+            </div>
+          </Tab>
+        </Tabs>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
 }
-        
+
 
