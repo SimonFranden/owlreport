@@ -24,7 +24,7 @@ App.js: Has a router that control what page is being displayed.
 
 Navbar.js: Has links so the user can select which page the router in App.js should route to.
 
-Login.js: The login page where the user logs in and stores userinformation that is nessecary when using the app
+Login.js: The login page where the user logs in and stores user information that is nessecary when using the app
 
 TimesheetUI.js: The page responsible for displayning all the latest time reports. also the page where the user can make a time report.
 
