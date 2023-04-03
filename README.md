@@ -1,7 +1,7 @@
 # owlreport
 This is a time report web app built with React. In order to run the app you need to run this Swagger API on the same machine: https://github.com/SimonFranden/owlreportAPI
 
-##Installation:
+Installation:
 ----
 *Clone this Repo.
  
@@ -18,7 +18,7 @@ This is a time report web app built with React. In order to run the app you need
 *Then run the command: npm start
 
 
-##Code structure
+Code structure
 ---
 App.js: Has a router that control what page is being displayed.
 
