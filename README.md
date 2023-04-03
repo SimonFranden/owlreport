@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# owlreport
+This is a time report web app built with React. In order to run the app you need to run this Swagger API on the same machine: https://github.com/SimonFranden/owlreportAPI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##Installation:
+----
+*Clone this Repo.
+ 
+ *Run these commands in the terminal:
+  npm i react-router-dom --save
+  npm i react-bootstrap --save
+  npm install bootstrap
+  npm install @mui/material @emotion/react @emotion/styled
+  npm install @mui/x-date-pickers
+  npm install dayjs
 
-## Available Scripts
+*Make sure to have the API program running
 
-In the project directory, you can run:
+*Then run the command: npm start
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+##Code structure
+---
+App.js: Has a router that control what page is being displayed.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Navbar.js: Has links so the user can select which page the router in App.js should route to.
 
-### `npm test`
+Login.js: The login page where the user logs in and stores userinformation that is nessecary when using the app
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+TimesheetUI.js: The page responsible for displayning all the latest time reports. also the page where the user can make a time report.
 
-### `npm run build`
+TimeSheetModal.js: A component in TimesheetUI that displays a popup modal with a form to make a time report.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ProjectsPage.js: The page where you can see all the projects in the database with various information about the projects.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+EditProjectModal.js: A component that is being rendered on the project that the user is the project owner of. In this modal you can edit the project settings ans members.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+DeleteProjectModal.js: A popup modal where the projectowner can delete the project.
