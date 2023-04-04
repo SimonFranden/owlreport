@@ -5,9 +5,9 @@ Installation:
 ----
 * Need to have either npm stand alone or installed Node.js on the local computer (contains Npm package manager)
 
-*Clone this Repo.
+* Clone this Repo.
  
- *Run these commands in the terminal:
+ * Run these commands in the terminal:
   npm i react-router-dom --save
   npm i react-bootstrap --save
   npm install bootstrap
@@ -15,9 +15,9 @@ Installation:
   npm install @mui/x-date-pickers
   npm install dayjs
 
-*Make sure to have the API program running
+* Make sure to have the API program running
 
-*Then run the command: npm start
+* Then run the command: npm start
 
 
 Code structure
