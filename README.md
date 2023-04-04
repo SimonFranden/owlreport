@@ -3,6 +3,8 @@ This is a time report web app built with React. In order to run the app you need
 
 Installation:
 ----
+* Need to have either npm stand alone or installed Node.js on the local computer (contains Npm package manager)
+
 *Clone this Repo.
  
  *Run these commands in the terminal:
